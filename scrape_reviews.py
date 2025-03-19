@@ -2,6 +2,7 @@ import os
 import json
 import time
 import re
+from tqdm import tqdm
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -122,10 +123,9 @@ def scrape_forum_reviews(forum_id, driver):
         "code_of_conduct": []
     }
 
-    
     url = f"https://openreview.net/forum?id={forum_id}"
     driver.get(url)
-    time.sleep(2)  # wait a bit for the page to load
+    time.sleep(0.5)  # wait a bit for the page to load
 
     # find divs that might contain Official Reviews
     divs = driver.find_elements(By.CSS_SELECTOR, "div.note.depth-odd")
@@ -219,21 +219,25 @@ def main():
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
 
-    # list of forum/entry IDs to scrape
-    forum_ids = [
-        "00SnKBGTsz",
-        "00ezkB2iZf",
-    ]
+    # open iclr paper list
+    with open('iclr2025.json', 'r') as f:
+        data = json.load(f)
 
     try:
-        for fid in forum_ids:
+        for idx in tqdm(range(len(data))):
+            fid = data[idx]["id"]
+            
             # scrape and parse forum reviews
             forum_data = scrape_forum_reviews(forum_id=fid, driver=driver)
+            forum_data["title"] = data[idx]["title"]
+            forum_data["track"] = data[idx]["track"]
+            forum_data["status"] = data[idx]["status"]
+            forum_data["keywords"] = data[idx]["keywords"]
+            forum_data["corr_rating_confidence"] = data[idx]["corr_rating_confidence"]
             
             # append to json
             append_forum_data_to_json(forum_data, json_file="reviews.json")
             print(f"Appended data for forum_id={fid} to reviews.json")
-
     finally:
         driver.quit()
 
