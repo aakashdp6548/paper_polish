@@ -125,7 +125,7 @@ def scrape_forum_reviews(forum_id, driver):
 
     url = f"https://openreview.net/forum?id={forum_id}"
     driver.get(url)
-    time.sleep(0.5)  # wait a bit for the page to load
+    time.sleep(1)  # wait a bit for the page to load
 
     # find divs that might contain Official Reviews
     divs = driver.find_elements(By.CSS_SELECTOR, "div.note.depth-odd")
@@ -224,11 +224,15 @@ def main():
         data = json.load(f)
 
     try:
-        for idx in tqdm(range(len(data))):
+        for idx in tqdm(range(4762, len(data))):
             fid = data[idx]["id"]
             
             # scrape and parse forum reviews
             forum_data = scrape_forum_reviews(forum_id=fid, driver=driver)
+            if forum_data["summaries"] == []:
+                time.sleep(30)
+                forum_data = scrape_forum_reviews(forum_id=fid, driver=driver)
+            
             forum_data["title"] = data[idx]["title"]
             forum_data["track"] = data[idx]["track"]
             forum_data["status"] = data[idx]["status"]
@@ -237,7 +241,7 @@ def main():
             
             # append to json
             append_forum_data_to_json(forum_data, json_file="reviews.json")
-            print(f"Appended data for forum_id={fid} to reviews.json")
+            # print(f"Appended data for forum_id={fid} to reviews.json")
     finally:
         driver.quit()
 
