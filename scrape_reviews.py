@@ -189,7 +189,7 @@ def scrape_forum_reviews(forum_id, driver):
     return forum_data
 
 
-def append_forum_data_to_json(forum_data, json_file="reviews.json"):
+def append_forum_data_to_json(forum_data, json_file):
     """
     Loads existing data from `json_file` (if present and valid),
     appends the new `forum_data` dict,
@@ -220,11 +220,13 @@ def main():
     driver = webdriver.Chrome(service=service, options=options)
 
     # open iclr paper list
-    with open('iclr2025.json', 'r') as f:
+    with open('iclr/paperlists/iclr2024.json', 'r') as f:
         data = json.load(f)
+    
+    json_file = "iclr/reviews/2024.json"
 
     try:
-        for idx in tqdm(range(4762, len(data))):
+        for idx in tqdm(range(len(data))):
             fid = data[idx]["id"]
             
             # scrape and parse forum reviews
@@ -240,7 +242,7 @@ def main():
             forum_data["corr_rating_confidence"] = data[idx]["corr_rating_confidence"]
             
             # append to json
-            append_forum_data_to_json(forum_data, json_file="reviews.json")
+            append_forum_data_to_json(forum_data, json_file=json_file)
             # print(f"Appended data for forum_id={fid} to reviews.json")
     finally:
         driver.quit()
