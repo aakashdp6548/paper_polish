@@ -1,2 +1,2 @@
-iclr/paperlists/* filter=lfs diff=lfs merge=lfs -text
 iclr/reviews/*.json filter=lfs diff=lfs merge=lfs -text
+iclr/paperlists/*.json filter=lfs diff=lfs merge=lfs -text
