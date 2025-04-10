@@ -1,0 +1,143 @@
+Wed Apr  9 04:37:33 EDT 2025
+r817u09n07.misha.ycrc.yale.edu
+/gpfs/radev/home/tj372/project/paper_polish/scripts
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: david-jeong (david-jeong-yale-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /gpfs/radev/project/dijk/tj372/paper_polish/wandb/run-20250409_043824-x3bl51lx
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run paper_polish_finetune_gemma3-4b
+wandb: ⭐️ View project at https://wandb.ai/david-jeong-yale-university/paper_polish
+wandb: 🚀 View run at https://wandb.ai/david-jeong-yale-university/paper_polish/runs/x3bl51lx
+Setting TOKENIZERS_PARALLELISM=false for forked processes.
+Starting dataset preprocessing...
+Map (num_proc=2):   0%|          | 0/9289 [00:00<?, ? examples/s]Map (num_proc=2):  11%|█         | 1000/9289 [00:19<02:42, 50.87 examples/s]Map (num_proc=2):  22%|██▏       | 2000/9289 [00:19<00:59, 122.33 examples/s]Map (num_proc=2):  32%|███▏      | 3000/9289 [00:37<01:17, 81.16 examples/s] Map (num_proc=2):  43%|████▎     | 4000/9289 [00:37<00:39, 133.22 examples/s]Map (num_proc=2):  43%|████▎     | 4000/9289 [00:48<00:39, 133.22 examples/s]Map (num_proc=2):  54%|█████▍    | 5000/9289 [00:54<00:46, 91.51 examples/s] Map (num_proc=2):  65%|██████▍   | 6000/9289 [00:54<00:24, 137.00 examples/s]Map (num_proc=2):  65%|██████▍   | 6000/9289 [01:08<00:24, 137.00 examples/s]Map (num_proc=2):  75%|███████▌  | 7000/9289 [01:11<00:23, 96.71 examples/s] Map (num_proc=2):  86%|████████▌ | 8000/9289 [01:11<00:09, 140.93 examples/s]Map (num_proc=2):  93%|█████████▎| 8645/9289 [01:21<00:05, 107.88 examples/s]Map (num_proc=2): 100%|██████████| 9289/9289 [01:22<00:00, 112.90 examples/s]
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 644
+attention_mask[0] shape: 12000, total: 644
+labels[0] shape: 12000, total: 644
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 1000
+attention_mask[0] shape: 12000, total: 1000
+labels[0] shape: 12000, total: 1000
+input_ids[0] shape: 12000, total: 645
+attention_mask[0] shape: 12000, total: 645
+labels[0] shape: 12000, total: 645
+Setting TOKENIZERS_PARALLELISM=false for forked processes.
+Map (num_proc=2):   0%|          | 0/1161 [00:00<?, ? examples/s]Map (num_proc=2):  50%|█████     | 581/1161 [00:11<00:11, 48.55 examples/s]Map (num_proc=2): 100%|██████████| 1161/1161 [00:12<00:00, 116.04 examples/s]Map (num_proc=2): 100%|██████████| 1161/1161 [00:12<00:00, 95.39 examples/s] 
+input_ids[0] shape: 12000, total: 581
+attention_mask[0] shape: 12000, total: 581
+labels[0] shape: 12000, total: 581
+input_ids[0] shape: 12000, total: 580
+attention_mask[0] shape: 12000, total: 580
+labels[0] shape: 12000, total: 580
+Setting TOKENIZERS_PARALLELISM=false for forked processes.
+Map (num_proc=2):   0%|          | 0/1162 [00:00<?, ? examples/s]Map (num_proc=2):  50%|█████     | 581/1162 [00:11<00:11, 48.42 examples/s]Map (num_proc=2): 100%|██████████| 1162/1162 [00:12<00:00, 108.53 examples/s]Map (num_proc=2): 100%|██████████| 1162/1162 [00:12<00:00, 90.94 examples/s] 
+input_ids[0] shape: 12000, total: 581
+attention_mask[0] shape: 12000, total: 581
+labels[0] shape: 12000, total: 581
+input_ids[0] shape: 12000, total: 581
+attention_mask[0] shape: 12000, total: 581
+labels[0] shape: 12000, total: 581
+/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/models/auto/modeling_auto.py:1682: FutureWarning: Loading a multimodal model with `AutoModelForCausalLM` is deprecated and will be removed in v5. `AutoModelForCausalLM` will be used to load only the text-to-text generation module.
+  warnings.warn(
+Dataset preprocessing finished.
+Sample batch from DataLoader:
+input_ids: shape=torch.Size([1, 12000]), dtype=torch.int64
+attention_mask: shape=torch.Size([1, 12000]), dtype=torch.int64
+labels: shape=torch.Size([1, 12000]), dtype=torch.int64
+{'train': Dataset({
+    features: ['model_input', 'result', 'id', 'title', 'track', 'status', 'keywords', 'primary_area', 'author', 'authorids', 'aff', 'aff_domain', 'position', 'rating', 'confidence', 'soundness', 'contribution', 'presentation', 'rating_avg', 'confidence_avg', 'soundness_avg', 'contribution_avg', 'presentation_avg', 'replies_avg', 'corr_rating_confidence', 'project', 'github', 'site', 'or', 'strengths', 'weaknesses', 'summary', 'questions', 'input_ids', 'attention_mask', 'labels'],
+    num_rows: 9289
+}), 'val': Dataset({
+    features: ['model_input', 'result', 'id', 'title', 'track', 'status', 'keywords', 'primary_area', 'author', 'authorids', 'aff', 'aff_domain', 'position', 'rating', 'confidence', 'soundness', 'contribution', 'presentation', 'rating_avg', 'confidence_avg', 'soundness_avg', 'contribution_avg', 'presentation_avg', 'replies_avg', 'corr_rating_confidence', 'project', 'github', 'site', 'or', 'strengths', 'weaknesses', 'summary', 'questions', 'input_ids', 'attention_mask', 'labels'],
+    num_rows: 1161
+}), 'test': Dataset({
+    features: ['model_input', 'result', 'id', 'title', 'track', 'status', 'keywords', 'primary_area', 'author', 'authorids', 'aff', 'aff_domain', 'position', 'rating', 'confidence', 'soundness', 'contribution', 'presentation', 'rating_avg', 'confidence_avg', 'soundness_avg', 'contribution_avg', 'presentation_avg', 'replies_avg', 'corr_rating_confidence', 'project', 'github', 'site', 'or', 'strengths', 'weaknesses', 'summary', 'questions', 'input_ids', 'attention_mask', 'labels'],
+    num_rows: 1162
+})}
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.19s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.05it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.01it/s]
+/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/training_args.py:1611: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+wandb: WARNING The `run_name` is currently set to the same value as `TrainingArguments.output_dir`. If this was not intended, please specify a different run name by setting the `TrainingArguments.run_name` parameter.
+  0%|          | 0/13935 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/gpfs/radev/project/dijk/tj372/paper_polish/train_review_generator.py", line 251, in <module>
+    main()
+  File "/gpfs/radev/project/dijk/tj372/paper_polish/train_review_generator.py", line 238, in main
+    trainer.train()
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/trainer.py", line 2556, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/trainer.py", line 3718, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/transformers/trainer.py", line 3783, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 183, in forward
+    inputs, module_kwargs = self.scatter(inputs, kwargs, self.device_ids)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 207, in scatter
+    return scatter_kwargs(inputs, kwargs, device_ids, dim=self.dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/scatter_gather.py", line 89, in scatter_kwargs
+    scattered_kwargs = scatter(kwargs, target_gpus, dim) if kwargs else []
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/scatter_gather.py", line 75, in scatter
+    res = scatter_map(inputs)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/scatter_gather.py", line 66, in scatter_map
+    return [type(obj)(i) for i in zip(*map(scatter_map, obj.items()))]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/scatter_gather.py", line 62, in scatter_map
+    return list(zip(*map(scatter_map, obj)))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/scatter_gather.py", line 58, in scatter_map
+    return Scatter.apply(target_gpus, None, dim, obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/_functions.py", line 103, in forward
+    outputs = comm.scatter(input, target_gpus, chunk_sizes, ctx.dim, streams)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/radev/home/tj372/.conda/envs/cpsc477-paper-polish/lib/python3.11/site-packages/torch/nn/parallel/comm.py", line 205, in scatter
+    return tuple(torch._C._scatter(tensor, devices, chunk_sizes, dim, streams))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: chunk expects at least a 1-dimensional tensor
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mpaper_polish_finetune_gemma3-4b[0m at: [34mhttps://wandb.ai/david-jeong-yale-university/paper_polish/runs/x3bl51lx[0m
+[1;34mwandb[0m: Find logs at: [1;35m../../../../project/dijk/tj372/paper_polish/wandb/run-20250409_043824-x3bl51lx/logs[0m
