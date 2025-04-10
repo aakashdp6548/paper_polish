@@ -5,6 +5,15 @@ from datasets import load_from_disk
 from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
 
 
+# #################################################################
+# NOTE: There's a bug in transformers that causes eval to fail when
+# using bfloat16 with gemma-3. To get around this, find the model's
+# config.json file by running
+#   `find /path/to/huggingface/cache -name config.json 2>/dev/null`
+# and change use_config to "false" in the file. Change it back
+# before inference.
+# #################################################################
+
 
 ### Prompts and constants
 STRENGTH_PROMPT = """<bos><start_of_turn>user
@@ -107,7 +116,8 @@ def main():
     
     # Training parameters
     parser.add_argument("--learning_rate", type=float, default=2e-5, help="Learning rate")
-    parser.add_argument("--batch_size", type=int, default=1, help="Batch size")
+    parser.add_argument("--train_batch_size", type=int, default=1, help="Batch size")
+    parser.add_argument("--eval_batch_size", type=int, default=1, help="Eval batch size")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4, help="Gradient accumulation steps")
     parser.add_argument("--max_length", type=int, default=12000, help="Max sequence length")
     parser.add_argument("--weight_decay", type=float, default=0.01, help="Weight decay")
@@ -122,6 +132,7 @@ def main():
     parser.add_argument("--logging_steps", type=int, default=10, help="Log every N steps")
     parser.add_argument("--save_steps", type=int, default=100, help="Save every N steps")
     parser.add_argument("--eval_steps", type=int, default=100, help="Eval every N steps")
+    parser.add_argument("--save_total_limit", type=int, default=3, help="Save total limit")
 
     # Other parameters
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
@@ -184,8 +195,10 @@ def main():
         eval_dataset = processed_dataset["val"], # Can set up evaluation!
         data_collator = collator,
         args = SFTConfig(
+            dataset_num_proc = 4,
             dataset_text_field = "prompt",
-            per_device_train_batch_size = args.batch_size,
+            per_device_train_batch_size = args.train_batch_size,
+            per_device_eval_batch_size = args.eval_batch_size,
             gradient_accumulation_steps = args.gradient_accumulation_steps, # Use GA to mimic batch size!
             warmup_ratio = args.warmup_ratio,
             num_train_epochs = args.num_train_epochs, # Set this for 1 full training run.
@@ -201,6 +214,7 @@ def main():
             seed = args.seed,
             report_to = "wandb", # Use this for WandB etc,
             remove_unused_columns = True,
+            save_total_limit = args.save_total_limit,
         ),
     )
 
