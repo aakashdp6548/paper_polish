@@ -5,6 +5,7 @@ import requests
 from tqdm import tqdm
 from datasets import Dataset
 import PyPDF2
+import re
 from concurrent.futures import ThreadPoolExecutor
 import tempfile
 
@@ -25,8 +26,43 @@ def download_pdf(paper_id, save_dir):
         print(f"Error downloading PDF for {paper_id}: {e}")
         return None
 
+def clean_pdf_text(text):
+    """Clean the text of a PDF file."""
+    """Clean the text of a PDF file."""
+    # Handle encoding issues
+    text = text.encode("utf-8", errors="ignore").decode("utf-8")
+    
+    # 1. Remove line numbers (patterns like 000, 001, 002...)
+    text = re.sub(r'(?m)^(?:\d{3}\s*)+$', '', text)  # Remove lines that contain only 3-digit numbers
+    
+    # 2. Remove conference paper headers
+    patterns = [
+        r"Published as a conference paper at .*?\n",
+        r"Under review as a conference paper at .*?\n"
+    ]
+    for pattern in patterns:
+        text = re.sub(pattern, "", text)
+    
+    # 3. Remove references section and anything after it
+    reference_patterns = [
+        r"References\s*\n.*$",
+        r"REFERENCES\s*\n.*$",
+        r"Bibliography\s*\n.*$",
+        r"BIBLIOGRAPHY\s*\n.*$"
+    ]
+    for pattern in reference_patterns:
+        match = re.search(pattern, text, re.DOTALL)
+        if match:
+            text = text[:match.start()]
+    
+    # Remove extra whitespace
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = text.strip()
+    
+    return text
+
 def extract_text_from_pdf(pdf_path, page_limit):
-    """Extract plain text from a PDF file."""
+    """Extract plain text from a PDF file and sanitize it."""
     if not pdf_path or not os.path.exists(pdf_path):
         return ""
 
@@ -37,7 +73,10 @@ def extract_text_from_pdf(pdf_path, page_limit):
             # Read up to first page_limit pages
             for page_num in range(min(len(pdf_reader.pages), page_limit)):
                 text += pdf_reader.pages[page_num].extract_text() + "\n"
-        return text.strip()
+        
+        # Sanitize by encoding then decoding with error handling
+        sanitized_text = clean_pdf_text(text)
+        return sanitized_text
     except Exception as e:
         print(f"Error extracting text from {pdf_path}: {e}")
         return ""
