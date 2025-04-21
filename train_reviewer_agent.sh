@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=paper_polish_finetune_gemma3-4b             # Job name
-#SBATCH --output logs/paper_polish_finetune_gemma4b_reviews_%J.log        # Output log file
+#SBATCH --job-name=finetune_reviewer_rank128             # Job name
+#SBATCH --output logs/finetune_reviewer_rank128_%J.log        # Output log file
 #SBATCH --partition gpu
 #SBATCH --requeue
 #SBATCH --nodes=1	
@@ -25,12 +25,14 @@ conda activate /home/ap2853/.conda/envs/unsloth_env
 # before inference.
 # #################################################################
 
+DATASET_PATH="/gpfs/radev/home/ap2853/project/paper_polish_dataset/merged_paper_reviews_2025_individual_samples.hf"
+
 python train_review_generator.py \
     --model_name google/gemma-3-4b-it \
-    --dataset_path /gpfs/radev/home/ap2853/paper_polish/datasets/merged_paper_reviews_2025_individual_samples.hf \
+    --dataset_path $DATASET_PATH \
     --output_dir /gpfs/radev/home/ap2853/paper_polish/models \
     --wandb_project paper_polish \
-    --wandb_run_name finetune_reviewer_agent_gemma3-4b \
+    --wandb_run_name finetune_reviewer_agent_gemma3-4b_rank128 \
     --learning_rate 2e-5 \
     --train_batch_size 1 \
     --eval_batch_size 1 \
@@ -38,8 +40,8 @@ python train_review_generator.py \
     --max_length 16000 \
     --weight_decay 0.01 \
     --warmup_ratio 0.1 \
-    --lora_rank 32 \
-    --lora_alpha 32 \
+    --lora_rank 128 \
+    --lora_alpha 128 \
     --lora_dropout 0 \
     --num_train_epochs 1 \
     --max_eval_samples 100 \

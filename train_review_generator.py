@@ -195,6 +195,7 @@ def main():
         eval_dataset = processed_dataset["val"], # Can set up evaluation!
         data_collator = collator,
         args = SFTConfig(
+            output_dir = args.output_dir,
             dataset_num_proc = 4,
             dataset_text_field = "prompt",
             per_device_train_batch_size = args.train_batch_size,
