@@ -2,6 +2,7 @@ import os
 from typing import Dict
 from datasets import load_from_disk
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from peft import PeftModel
 from langchain_community.llms import HuggingFacePipeline
 from langchain_core.messages import AIMessage, ToolMessage, BaseMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -17,38 +18,46 @@ from pydantic import BaseModel, Field
 
 os.environ["OPENAI_API_KEY"] = "..."
 # debugging
-# os.environ["CUDA_VISIBLE_DEVICES"] = "MIG-6d25d029-31ac-5260-87fb-3e232ed96dad"
+os.environ["CUDA_VISIBLE_DEVICES"] = "MIG-a5189f65-9660-5b03-8e8f-a63f7146324d"
 
 
 # ---------- Initialize LLMs ----------
 
 # Supervisor agent using GPT for synthesizing improvements.
 supervisor_llm = ChatOpenAI(
-    model="gpt-4o-mini",
+    model="gpt-4o",
     temperature=0.2,
-    max_tokens=1000,
+    max_tokens=15000,
     timeout=None,
     max_retries=2,
 )
 
-# Reviewer agents using Gemma-3-4b-it for analyzing strengths and weaknesses.
-model_name = "google/gemma-3-4b-it"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+base_path = "hf_models/gemma3_4b" # local full model
+lora_path = "/gpfs/radev/home/ap2853/paper_polish/models/checkpoint-1000/"
+
+base_model = AutoModelForCausalLM.from_pretrained(
+    base_path,
+    device_map="auto",
+    torch_dtype="auto",
+)
+
+tokenizer  = AutoTokenizer.from_pretrained(base_path)
 if tokenizer.pad_token is None:
-    print("Warning: Tokenizer does not have a pad token. Setting pad_token = eos_token.")
     tokenizer.pad_token = tokenizer.eos_token
 
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
+model = PeftModel.from_pretrained(base_model, lora_path)
+model = model.merge_and_unload()
+
 pipe = pipeline(
     "text-generation",
     model=model,
     tokenizer=tokenizer,
-    max_new_tokens=500,
+    max_new_tokens=1000,
     temperature=0.1,
-    )
+)
 
 reviewer_llm = HuggingFacePipeline(pipeline=pipe)
-
 
 
 
@@ -147,10 +156,13 @@ def synthesis_tool(paper: str) -> str:
     strengths = strengths_chain.invoke({"paper": paper})
     weaknesses = weaknesses_chain.invoke({"paper": paper})
 
+    with open("run_multi_agent_single_tool_weaknesses.txt", "w") as f:
+        f.write("WEAKNESSES:\n")
+        f.write(weaknesses)
     
-    print(f"Paper: {paper[:50]}...")
-    print(f"Strengths: {strengths}")
-    print(f"Weaknesses: {weaknesses}")
+    with open("run_multi_agent_single_tool_strengths.txt", "w") as f:
+        f.write("STRENGTHS:\n")
+        f.write(strengths)
 
     print("\n\n")
     result = synthesis_chain.invoke({
@@ -258,7 +270,7 @@ for msg in final_history.messages:
 # store[session_id].clear()
 
 
-with open("multi_agent_review_output_single_tool.txt", "w") as f:
+with open("run_multi_agent_single_tool_output.txt", "w") as f:
     f.write("FINAL OUTPUT:\n")
     f.write(result["output"] + "\n\n")
 
