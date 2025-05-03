@@ -60,7 +60,6 @@ reviewer_llm = HuggingFacePipeline(pipeline=pipe)
 
 
 # ---------- Define the individual chains ----------
-# Strengths Chain: Given a paper text, output its strengths.
 strengths_prompt_template = """
 <bos><start_of_turn>user
 ### INSTRUCTIONS:
@@ -185,7 +184,7 @@ tools = [
     )
 ]
 
-# --- History Management (Your existing code is fine) ---
+# --- History Management for Supervisor LLM ---
 class InMemoryHistory(BaseChatMessageHistory, BaseModel):
     messages: list[BaseMessage] = Field(default_factory=list)
     def add_messages(self, messages: list[BaseMessage]) -> None:
